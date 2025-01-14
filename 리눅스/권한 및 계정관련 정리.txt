@@ -1,0 +1,32 @@
+-권한-
+==================================
+chown - 소유권 변경
+chmod - 허가권 변경
+
+ - chown 실습
+   - chown user10:user10 chown       -- 소유자 / 소유자 그룹 변경
+   - chown -R user10:user10 /chown  --  하위 파일 , 디렉토리까지 다 변경
+
+
+허가권 부여방식
+ - numeric -- 숫자 형식으로 부변경 ( 777 )
+ - symbolic -- 문자 형식으로 변경 ( rwx ) 
+                   R             W                   X 
+                소유자         그룹               나머지
+                   (u)            (g)                 (o)
+ 
+
+==============================================
+-계정(1)-
+
+  /etc/login.defs : 보안 관련 파일
+  /etc/default/useradd : 계정 기본 경로 설정
+
+  -u : uid 설정 // useradd -u 111 test1
+  -g : 주그룹 설정 // useradd -g test test2
+  -G : 보조 그룹 지정 // useradd -G heath test4
+  -c : 코멘트 // useradd -c smj123 test5
+  -d : 홈디렉토리 경로 지정 // useradd -d /export/home/test6
+  -m : 메뉴얼 // useradd -m -k /skeltest test7
+  -k : 스컬디렉토리 경로 지정 // useradd -m -k /skeltest test8
+  -s : 쉘지정 // useradd -s /bin/ksh test10
