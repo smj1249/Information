@@ -1,0 +1,21 @@
+< git 기본 명령어 정리 >
+
+git config --global // 최초 실행 시
+
+git init    // 초기 파일 생성
+git add * // SA에 WD 변경 사항 저장
+git commit -m   // COMMIT 시점 저장(버전기록) 
+git reset // (이전 버전으로 돌아가기)
+
+=> hard   //   WD(x) SA(x) Head(이동)
+=> soft    //   WD(o) SA(o) Head(이동)
+=> mixed //   WD(o) SA(x) Head(이동)
+
+
+git merge : 합치기 // 합치고자 하는 브렌치에서 명령어 실행 
+git checkout : 교체
+git log --oneline : 로그 한 번에 보기
+git branch ~ : 현재 작업중인 브랜치를 보거나 추가 할 수 있다.
+git push origin : 깃허브로 전송
+git clone 주소 : 깃허브에서 다운
+
