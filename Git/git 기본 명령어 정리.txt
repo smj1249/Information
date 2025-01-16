@@ -18,4 +18,5 @@ git log --oneline : 로그 한 번에 보기
 git branch ~ : 현재 작업중인 브랜치를 보거나 추가 할 수 있다.
 git push origin : 깃허브로 전송
 git clone 주소 : 깃허브에서 다운
+git branch -r : branch 목록 보기
 
