@@ -1,0 +1,59 @@
+<이클립스 , Git 협업 관련 기본 작업 >
+ 1. WorkSpace 경로 설정
+
+ 2. Tomcat 연결하기  
+    // 톰캣 설치 경로로 가야함 ( c-> program file )
+
+ 3. DynamicWeb Project 생성
+    // File > New > Dynamic Web Project 선택
+    // Target runtime에서 Tomcat 선택
+
+ 4. Java Version 11버전 설정
+    // 프로젝트 우클릭 -> Properties -> prject Facets -> java 버전 11 변경 후, 오른쪽 runtimes 톰캣 확인 후, apply
+
+ 5. Servlet.jar, jsp-api.jar를 lib로 이동
+   // 톰캣 설치 경로로 가야함 ( c-> program file ) WebContent/WEB-INF/lib 디렉토리에 복사
+
+ 6. Webapp > index.jsp 생성
+
+ 7. 동작확인
+   // server 더블클릭 포트넘버 8091, 8090으로 변경 후 (시험 지문에 포트 번호는 적혀있음) , 서버 스타트 -> run as 
+
+======================================
+
+<Git 설정>
+ 1. git init 설정
+   // window탭에서 show view (other) ->git 검색 후, git repositories, git staging 밑에 탭으로 빼기 , team에서 history도 빼기
+   // 좌측 탭에서 우클릭 후, team 에서 share project 클릭
+
+ 2. index.jsp에 내용추가 후, commit 하기 (V0.0 - master)
+   // git repositories에서 경로 만든 곳에 new creat 만들기
+   // git staging에서 모두 커밋하기
+
+ 3. branch 생서 (dev)
+   // team -> new branch
+
+ 4. dev branch로 전환 후, index.jsp에 내용 수정 후 , commit(V0.1 -dev)
+
+ 5. branch 생성 (feature/board)
+
+ 6. feature/board branch로 전환 후, index.jsp에 내용 수정 후 commit (V0.2 -board)
+   // Dev branch에서 커밋
+
+ 7. feature/auth branch로 전환 후, index.jsp에 내용 수정 후 commit (V0.2 -auth)
+   // // Dev branch에서 커밋
+
+ 8. feature/board -> dev로 병합 (V0.2 -dev board)
+
+ 9. feature/auth -> dev로 병합 (V0.2 -dev auth)
+
+10. dev -> master로 병합 (V0.2 master)
+
+===============================================
+
+<GITHUB과 ECLIPS 연동>
+ 1. Git Repositories -> Remotes 우클릭 -> URL 깃허브 주소 -> 비밀번호 : 깃허브 셋팅 들어가서 맽 밑 Developer Settings -> personal access tokens에서 발급
+    // ECLIPS -> GITHUB 전송
+ 
+ 2. File -> Import : 깃허브 주소 복사 / 붙여넣기 
+   // GITHUB -> ECLIPS   
