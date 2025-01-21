@@ -20,3 +20,4 @@ git push origin : 깃허브로 전송
 git clone 주소 : 깃허브에서 다운
 git branch -r : branch 목록 보기
 
+스태시(stash) : 임시 저장하는 곳
