@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>표 만들기</title>
+    <style>
+        td {
+            width: 50px;
+            height: 50px;
+            border: 1px solid gray;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        input {
+            width: 90%;
+            height: 100%;
+            outline: none;
+            border: 0px;
+        }
+
+        .input-container {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="input-container">
+        <input id="rownum" placeholder="행의 개수 입력" style="width:200px;">
+        <input id="colnum" placeholder="열의 개수 입력" style="width:200px;">
+        <button onclick="makemap()">생성</button>
+    </div>
+
+    <hr>
+    <table id="tbl">
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        // State
+        let curX = 0;
+        let curY = 0;
+        let selectedNode = null;
+
+        const selectedstyle = (xPos, yPos) => {
+            const tblEl = document.querySelector('#tbl tbody');
+            const trEl = tblEl.children[yPos];
+            const tdEl = trEl.children[xPos];
+            if (selectedNode) {
+                // 이전에 선택된 노드가 없는 경우
+                deSelectedStyle(selectedNode);
+            }
+            // 이전에 선택된 노드가 있는경우
+            selectedNode = document.getElementById(`${xPos}-${yPos}`);
+            selectedNode.style.backgroundColor = 'yellow';
+
+        }
+        const deSelectedStyle = (node) => {
+            node.style.backgroundColor = 'white';
+        }
+
+        function makemap() {
+            const rownum = document.querySelector('#rownum').value; // tr의 개수
+            const colnum = document.querySelector('#colnum').value; // td의 개수
+            const tblEl = document.querySelector('#tbl tbody');
+
+            // 기존 테이블 내용 비우기
+            while (tblEl.firstChild) {
+                tblEl.removeChild(tblEl.firstChild);
+            }
+
+            for (let i = 0; i < rownum; i++) {
+                const trEl = document.createElement('tr');
+
+                for (let j = 0; j < colnum; j++) {
+                    const tdEl = document.createElement('td');
+                    tdEl.addEventListener('click', (e) => {
+                        console.log('클릭node', tdEl);
+                        const id = tdEl.getAttribute('id');
+                        const [xPos, yPos] = id.split('-').map(Number);
+                        selectedstyle(xPos, yPos);
+                    });
+                    tdEl.innerHTML = `(${j},${i})`;
+                    tdEl.setAttribute('id', `${j}-${i}`);
+                    trEl.appendChild(tdEl);
+                }
+                tblEl.appendChild(trEl);
+            }
+            // 기본 cur 위치
+            curX = Math.ceil(colnum / 2 - 1);
+            curY = Math.ceil(rownum / 2 - 1);
+            // 초기 선택된 위치 스타일링
+            selectedstyle(curX, curY);
+        }
+    </script>
+</body>
+
+</html>
