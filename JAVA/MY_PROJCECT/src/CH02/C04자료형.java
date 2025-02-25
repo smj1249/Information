@@ -54,11 +54,11 @@ public class C04자료형 {
 		// doblue : 8byte 실수(15-18자리),기본자료형
 
 		// 정밀도 확인
-		float n1 = 0.123456789123456789F; // f,F:float형 접미사
-		double n2 = 0.123456789123456789;
-
-		System.out.println(n1);
-		System.out.println(n2);
+//		float n1 = 0.123456789123456789F; // f,F:float형 접미사
+//		double n2 = 0.123456789123456789;
+//
+//		System.out.println(n1);
+//		System.out.println(n2);
 		// 오차 확인
 //				float num = 0.1F;
 //				for(int i=0;i<=1E5;i++) {
@@ -73,7 +73,7 @@ public class C04자료형 {
 //				char ch1 = 'a';
 //				System.out.println(ch1);
 //				System.out.println((int)ch1); // 011000001
-		//
+//		
 //				
 //				char ch2 = 98;
 //				System.out.println(ch2);
@@ -87,7 +87,7 @@ public class C04자료형 {
 //				System.out.println((char)ch4);
 //				System.out.println(ch4); // 011000011
 
-//				char ch5  = 0xac00;
+//				char ch5  = 0xac93;
 //				char ch6 = 44032;
 //				
 //				System.out.println(ch5);
@@ -99,9 +99,9 @@ public class C04자료형 {
 //				
 //				// \\u :유니코드값 이스케이프문자
 //				System.out.printf("%c\n", '\uACa1');
-
+//
 //				System.out.printf("TEST : %c\n", '\uabcd');
-
+//
 //				char n = 10;
 //				System.out.printf("HELLO %c WORLD", n);
 
@@ -126,6 +126,7 @@ public class C04자료형 {
 //				String job = "프로그래머";
 //				System.out.println(name);
 //				System.out.println(job);
+		
 
 		// --------------------
 		// boolean : 논리형(true/false 저장)
