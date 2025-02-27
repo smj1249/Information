@@ -20,6 +20,9 @@ public class C05상수 {
 		final double PI = 3.14;
 		
 		double result = PI*4*4;
+		
+		double a = 1e-3;
+		System.out.println(a);
 	}
 
 }
