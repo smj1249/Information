@@ -18,7 +18,7 @@ class Employee{
 	public String getAddr() {
 		return addr;
 	}
-	public void setAddr(String addr) {
+	public void setAddr(String addr) { 
 		this.addr = addr;
 	}
 	String addr;
