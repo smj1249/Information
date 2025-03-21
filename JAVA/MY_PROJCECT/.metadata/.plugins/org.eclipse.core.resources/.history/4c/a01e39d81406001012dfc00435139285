@@ -1,0 +1,53 @@
+package CH33;
+
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class C03FunctionalInterfaceMain {
+
+    // 01: 제곱을 구하는 함수
+    public static Function<Integer, Integer> func1 = x -> x * x;
+
+    // 02: 값을 두 배로 만드는 함수
+    public static Function<Integer, Integer> func2 = x -> x + x;
+
+    // 03: 리스트의 모든 숫자를 더하는 함수
+    public static Function<List<Integer>, Integer> func3 = (x) -> x.stream().reduce(0, Integer::sum);
+
+    // 04: 리스트에서 Integer 타입의 요소만 추출하여 합산하는 함수
+    public static Function<List<Object>, Integer> func4 = (li) -> 
+        li.stream()
+          .filter(el -> el instanceof Integer) // Integer 타입만 필터링
+          .map(el -> (Integer) el)  // Object -> Integer 변환
+          .reduce(0, Integer::sum); // 누적합 계산
+
+    // 05: 리스트에서 Integer 타입의 요소만 추출하여 리스트로 반환하는 함수
+    public static Function<List<Object>, List<Integer>> func5 = (li) -> 
+        li.stream()
+          .filter(el -> el instanceof Integer) // Integer 타입만 필터링
+          .map(el -> (Integer) el)  // Object -> Integer 변환
+          .collect(Collectors.toList()); // 리스트로 변환
+
+    // 06
+    public static Function<Integer,Integer> func6=func1.andThen(func2);
+        
+      
+    public static void main(String[] args) {
+        // 01: 제곱 함수 테스트
+        System.out.println("10의 제곱: " + func1.apply(10)); // 100
+
+        // 02: 두 배 함수 테스트
+        System.out.println("10의 두 배: " + func2.apply(10)); // 20
+
+        // 03: 리스트 합계 함수 테스트
+        System.out.println("리스트 합: " + func3.apply(Arrays.asList(10, 20, 30, 40))); // 100
+
+        // 04: 리스트에서 Integer만 추출하여 합산하는 함수 테스트
+        List<Object> mixedList = Arrays.asList(10, "hello", 20, 30, "world", 40);
+        System.out.println("Integer만 합산: " + func4.apply(mixedList)); // 100
+
+        // 05: 리스트에서 Integer만 추출하여 반환하는 함수 테스트
+        System.out.println("Integer만 리스트로 반환: " + func5.apply(mixedList)); // [10, 20, 30, 40]
+    }
+}

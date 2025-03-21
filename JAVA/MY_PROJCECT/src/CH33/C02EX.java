@@ -14,10 +14,19 @@ class Calc{
 	Functional div;		// 나누기
 	Calc(){
 		// Functional sum에 대한 람다식 완성 할 것
-		sum = (args)->{Arrays.stream(args).sum;};
+		sum = (args)-> Arrays.stream(args).reduce(0,(sum,el)->sum+el);
 		// Functional sub에 대한 람다식 완성 할 것
+		sub = (args)->{return Arrays
+				.stream(args).boxed().sorted((a,b)->{return b-a;})
+				.reduce(0, (sub,el)->{return sub<el?el-sub:sub-el;});
+		};
 		// Functional mul에 대한 람다식 완성 할 것
+		mul = (args)->{
+			return Arrays.stream(args).reduce(1, (mul,el)->mul*el);
+			};
 		// Functional div에 대한 람다식 완성 할 것
+		div = (args)->{return null;};
+		
 		// 조건
 		// sum, sub, mul, div 각각에 람다식&스트림함수를 적절히 이용해서 기능 구현을 하기
 		// 모든 인자를 받을 수있는 가변인자 처리로 구현하기
