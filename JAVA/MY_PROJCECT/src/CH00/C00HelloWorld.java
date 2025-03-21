@@ -1,4 +1,4 @@
-package Ch00;	// 패키지 구별코드
+package CH00;	// 패키지 구별코드
 
 public class C00HelloWorld 	// 클래스 영역(객체지향 문법 적용 범위)
 {
