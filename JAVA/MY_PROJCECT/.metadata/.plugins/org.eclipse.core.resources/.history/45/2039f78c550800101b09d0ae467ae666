@@ -1,0 +1,20 @@
+package CH35;
+
+import CH35.Unit;
+
+public class Marine extends Unit {
+	// hp,amor,type
+	int base_damage;
+	*
+	@Override
+	void move() {
+		System.out.println(type + " 이동합니다.");		
+	}
+
+	@Override
+	void underAttact(int damage) {
+		// amor --0 -> hp ---> dead
+		
+	}
+	
+}

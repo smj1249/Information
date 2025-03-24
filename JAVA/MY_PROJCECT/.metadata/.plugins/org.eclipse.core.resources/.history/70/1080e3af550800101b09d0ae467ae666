@@ -1,0 +1,11 @@
+package CH35;
+
+import CH35.unit.Unit;
+
+public abstract class Gun {
+	int bullitCnt;
+	int power;
+	
+	abstract void fire(Unit unit);
+	abstract void reload(int bullit);
+}
