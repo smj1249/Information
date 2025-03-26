@@ -1,0 +1,12 @@
+package building;
+
+public class Bulding {
+	public int hp;
+	public int sheld;
+	public int amor;
+	
+	// 건물 짓기
+	abstract buildStructure();
+	// 공격 당함
+	abstract void under Attack(Unit unit);
+}

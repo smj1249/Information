@@ -1,15 +1,32 @@
-package CH35.unit;
+package Ch35.unit;
 
-public class Medic extends Unit {
+public class Medic extends Unit{
+	//hp,amor,type
+	private int HealingPoint;
+	
+	public Medic() {
+		hp=100;
+		amor=100;
+		HealingPoint=30;
+	}
+	void setType(String type) {
+		this.type = type;
+	}
+	public void Healing(Unit unit) {
+		unit.hp+=HealingPoint;
+		System.out.println(unit.type+" 을 회복시킵니다"+unit.type+" 체력 : "+unit.hp);
+	}
 	
 	@Override
-	void move() {
+	public void move() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	void underAttact(int damage) {
-		
+	public void underAttact(int damage) {
+		// TODO Auto-generated method stub
 		
 	}
-	
+
 }

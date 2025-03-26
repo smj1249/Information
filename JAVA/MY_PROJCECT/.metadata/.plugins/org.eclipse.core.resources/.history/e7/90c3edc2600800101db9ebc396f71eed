@@ -1,0 +1,25 @@
+package building;
+import CH35.unit.Unit;
+public class Building {
+	public int hp;		// 체력
+	public int sheld;	// 보호막
+	public int amor;	// 보호장비
+	
+	// 건물 짓기
+	abstract buildStructure();
+	// 공격 당함
+	void under Attack(int damage) {
+		// sheld -> amor -> hp
+		if(sheld-damage > 0) {
+			this.sheld=damage;
+		}
+		else if(amor -(damage - sheld) > 0) {
+			amor = amor-(damage - sheld);
+			sheld=0;
+		}
+		else if(hp-(damage-amor) > 0) {
+			
+		}
+	};
+	
+}
