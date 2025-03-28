@@ -1,0 +1,11 @@
+1 각조별 브랜치로 변경
+2 [조장]Team_interface 의 각 조별 패키지 내의 Calculator Interface를 C99Ex에 보는 main코드에 맞게 설정
+3 [조원] 각조별 브랜치에서 -feature을 추가해서 브랜치 생성(ex 1조-feature-Sum , 1조-feature-Sub)
+4 [조원]각 조원들은 사칙연산 클래스를 Calculator와 implements 설정해서 필요한 메서드만 완성
+5 [조원]함수를 완성한 다음에 해당 브랜치로 PUSH 
+6 [조원]GITHUB에서 해당 조별 branch로 pull request(예. 1조-feature-Sum을 1조 브랜치로 pull Request)
+7 [조원,조장] Review- 4개이상 달리면 해당 작업을 했던 조원이 merge 작업을 함
+8 [조장] Div,Sum,Sub,Mul 작업이 다 끝난것이 확인되면 Dev branch 에 pull request 요청
+9 [조장] 4개이상 리뷰가 달리면 merge작업을 함
+10[조장] 강사에게 알림
+ 
