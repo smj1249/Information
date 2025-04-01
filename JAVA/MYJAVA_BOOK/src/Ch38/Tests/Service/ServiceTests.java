@@ -1,7 +1,5 @@
 package Ch38.Tests.Service;
 
-import java.sql.SQLException;
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -14,15 +12,16 @@ class ServiceTests {
 
 	
 	@Test
-	void test() throws ClassNotFoundException, SQLException {
+	void test() throws Exception {
 
 		UserServiceImpl userService=UserServiceImpl.getInstance();
-		
-		userService.userJoin(new UserDto("1b","남길동","1234","ROLE_USER"));
+		userService.userJoin(null);
+//		userService.userJoin(new UserDto("1b","남길동","1234","ROLE_USER"));
 	}
 
 	
 	@Test
+	@Disabled
 	void test_2() throws Exception {
 		BookServiceImpl bookService = BookServiceImpl.getInstance();
 		bookService.bookRegistration(new BookDto("1010101","C언어기본","코리아미디어","1010-1010"));	

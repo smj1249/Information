@@ -7,28 +7,35 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import Ch36.Domain.Dao.Common.ConnectionPool;
+import Ch38.Domain.Dao.ConnectionPool.ConnectionItem;
 import Ch38.Domain.Dto.BookDto;
 import Ch38.Domain.Dto.UserDto;
 
-public class BookDaoImpl {
+public class BookDaoImpl implements BookDao {
 	//DB Attr
-	private Connection conn;
+//	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
-	private String id="root";
-	private String pw="1234";
-	private String url="jdbc:mysql://localhost:3306/bookDB";
+//	private String id="root";
+//	private String pw="1234";
+//	private String url="jdbc:mysql://localhost:3306/bookDB";
+	
+	// CONNECTION POOL
+	private ConnectionPool connectionPool;
+	private ConnectionItem connectionItem;
 	
 	//싱글톤
 	
-	private static BookDaoImpl instance;
-	private BookDaoImpl() throws ClassNotFoundException, SQLException {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		conn = DriverManager.getConnection(url,id,pw);
+	private static BookDao instance;
+	private BookDaoImpl() throws Exception {
+//		Class.forName("com.mysql.cj.jdbc.Driver");
+//		conn = DriverManager.getConnection(url,id,pw);
+		connectionPool = ConnectionPool.getInstance();
 		System.out.println("UserDaoImpl DB Connection Success");
 	};
-	public static BookDaoImpl getInstance() throws ClassNotFoundException, SQLException {
+	public static BookDao getInstance() throws Exception {
 		if(instance==null)
 			instance=new BookDaoImpl();
 		return instance;
@@ -36,13 +43,22 @@ public class BookDaoImpl {
 	
 	//CRUD 
 	 
+	@Override
 	public int insert(BookDto bookDto) throws SQLException {
 		try {
+			// connection get
+			connectionItem = connectionPool.getConnection();
+			Connection conn = connectionItem.getConn();
+			
 			pstmt = conn.prepareStatement("insert into tbl_book values(?,?,?,?)");
 			pstmt.setString(1, bookDto.getBookCode());
 			pstmt.setString(2, bookDto.getBookName());
 			pstmt.setString(3, bookDto.getPublisher());
 			pstmt.setString(4, bookDto.getIsbn());
+			
+			// connection release
+			connectionPool.releaseConnection(connectionItem);
+			
 			return pstmt.executeUpdate();
 			
 		}catch(SQLException e) {
@@ -54,6 +70,7 @@ public class BookDaoImpl {
 	}
 	
  
+	@Override
 	public int update(UserDto userDto) throws SQLException {
 		try {
 			pstmt = conn.prepareStatement("");
@@ -68,6 +85,7 @@ public class BookDaoImpl {
 		}
 	}
  
+	@Override
 	public int delete(UserDto userDto) throws SQLException {
 		try {
 			pstmt = conn.prepareStatement("");
@@ -83,11 +101,13 @@ public class BookDaoImpl {
 	}
 	//단건조회
  
+	@Override
 	public UserDto select(UserDto userDto) {	
 		return null;
 	}
 	//다건조회
  
+	@Override
 	public List<UserDto> selectAll() {	
 		return null;
 	}	

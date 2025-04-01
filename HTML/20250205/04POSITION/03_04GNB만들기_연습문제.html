@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* common */
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        /* layout */
+        .wrapper {}
+
+        /* header */
+        .wrapper>header {}
+
+        .wrapper>header>.top-header {}
+
+        .wrapper>header>nav {
+            height: 50px;
+        }
+
+        /* main-menu */
+        .wrapper>header>nav>ul.main-menu {
+            border: 1px solid red;
+            display: flex;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .wrapper>header>nav>ul.main-menu>li {
+            border: 1px solid green;
+            width: 100%;
+            height: 100%;
+            line-height: 50px;
+            text-align: center;
+        }
+
+        .wrapper>header>nav>ul.main-menu>li>a {
+            background-color: orangered;
+            display: block;
+        }
+
+        /* sub-menu */
+        .wrapper>header>nav>ul.main-menu>li>ul.sub-menu {
+            background-color: aqua;
+            display: none;
+        }
+
+        .wrapper>header>nav>ul.main-menu>li>ul.sub-menu>li>ul>li {
+            display: none;
+        }
+
+        .wrapper>header>nav>ul.main-menu>li>ul.sub-menu>li {
+            border: 1px solid rosybrown;
+
+        }
+
+        .wrapper>header>nav>ul.main-menu>li>ul.sub-menu>li>a {
+            background-color: whitesmoke;
+            display: block;
+
+        }
+
+        /* hover event == 밑으로 내려왔다 올라갔다*/
+        .wrapper>header>nav>ul.main-menu>li:hover>ul.sub-menu {
+            display: block;
+        }
+
+        /* subsub-menu */
+        .wrapper>header>nav>ul.main-menu>li>ul.sub-menu>li>ul.subsub-menu>li{
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+        }
+
+        .wrapper>header>nav>ul.main-menu>li>ul.sub-menu:hover>li>ul.subsub-menu>li {
+            display: block;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        /* main  */
+        .wrapper>main {}
+
+        .wrapper>main>section {}
+
+        /* footer */
+        .wrapper>footer {}
+    </style>
+</head>
+
+<body>
+    <h1>˘̴͈́ꈊ˘̴͈́ 고양이공원</h1>
+    <div class="wrapper">
+        <header>
+            <div class="top-header"></div>
+            <nav>
+                <ul class="main-menu">
+                    <li>
+                        <a href="javascript:void(0)">☰</a>
+                        <ul class="sub-menu">
+                            <li><a href="javascript:void(0)">고양이</a>
+                                <ul class="subsub-menu">
+                                    <li><a href="javascript:void(0)">고양이 사료</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:void(0)">강아지</a>
+                                <ul class="subsub-menu">
+                                    <li><a href="javascript:void(0)">강아지 사료</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:void(0)">호랑이</a>
+                                <ul class="subsub-menu">
+                                    <li><a href="javascript:void(0)">호랑이 사료</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:void(0)">사자</a>
+                                <ul class="subsub-menu">
+                                    <li><a href="javascript:void(0)">사자 사료</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:void(0)">물개</a>
+                                <ul class="subsub-menu">
+                                    <li><a href="javascript:void(0)">물개 사료</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">강아지 사료</a>
+                        <ul class="sub-menu">
+                            <li><a href="javascript:void(0)">브랜드</a>
+                                <ul class="subsub-menu">
+                                    <li><a href="javascript:void(0)">브랜드 1</a></li>
+                                </ul>
+                                <ul class="subsub-menu">
+                                    <li><a href="javascript:void(0)">브랜드 2</a></li>
+                                </ul>
+                                <ul class="subsub-menu">
+                                    <li><a href="javascript:void(0)">브랜드 3</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:void(0)">나이</a>
+                                <ul class="subsub-menu">
+                                    <li><a href="javascript:void(0)">10대 용</a></li>
+                                </ul>
+                                <ul class="subsub-menu">
+                                    <li><a href="javascript:void(0)">20대 용</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:void(0)">할인률</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">2_mainmenu</a>
+                        <ul class="sub-menu">
+                            <li><a href="javascript:void(0)">1_submenu</a></li>
+                            <li><a href="javascript:void(0)">2_submenu</a></li>
+                            <li><a href="javascript:void(0)">3_submenu</a></li>
+                            <li><a href="javascript:void(0)">4_submenu</a></li>
+                            <li><a href="javascript:void(0)">5_submenu</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">3_mainmenu</a>
+                        <ul class="sub-menu">
+                            <li><a href="javascript:void(0)">1_submenu</a></li>
+                            <li><a href="javascript:void(0)">2_submenu</a></li>
+                            <li><a href="javascript:void(0)">3_submenu</a></li>
+                            <li><a href="javascript:void(0)">4_submenu</a></li>
+                            <li><a href="javascript:void(0)">5_submenu</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">4_mainmenu</a>
+                        <ul class="sub-menu">
+                            <li><a href="javascript:void(0)">1_submenu</a></li>
+                            <li><a href="javascript:void(0)">2_submenu</a></li>
+                            <li><a href="javascript:void(0)">3_submenu</a></li>
+                            <li><a href="javascript:void(0)">4_submenu</a></li>
+                            <li><a href="javascript:void(0)">5_submenu</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </nav>
+        </header>
+        <main>
+            <section></section>
+        </main>
+        <footer></footer>
+    </div>
+</body>
+
+</html>
