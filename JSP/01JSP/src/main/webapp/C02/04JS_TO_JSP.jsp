@@ -25,7 +25,7 @@
 	<%=password%><br> ROLE :
 	<%=role%><br>
 
-	<form action="C04JStoJSP.jsp" name="myForm">
+	<form action="04JStoJSP.jsp" name="myForm">
 		<input name="username" type="hidden" /> <input name="password"
 			type="hidden" /> <input name="role" type="hidden" /> <input
 			name="flag" value="true" type="hidden" />
