@@ -8,19 +8,12 @@
 </head>
 <body>
 
-<%!
-	int n = 0;
-	public int countUp(){
-		n++;
-		return n;
-	}
-	
-
-%>
-
-<%=countUp()%>
-
-
+	<form action="02Main.jsp">
+		<input type="text" name="name" /><br>
+		<input type="text" name="age"/><br>
+		<input type="text" name="addr"/><br>
+		<button>전송</button>
+	</form>
 
 </body>
 </html>

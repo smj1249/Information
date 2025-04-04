@@ -8,19 +8,7 @@
 </head>
 <body>
 
-<%!
-	int n = 0;
-	public int countUp(){
-		n++;
-		return n;
-	}
-	
-
-%>
-
-<%=countUp()%>
-
-
+	<h1>04 RESULT</h1>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"  isErrorPage="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,19 +8,9 @@
 </head>
 <body>
 
-<%!
-	int n = 0;
-	public int countUp(){
-		n++;
-		return n;
-	}
-	
-
-%>
-
-<%=countUp()%>
-
-
+	<h1>ERROR PAGE...</h1>
+	<hr/>
+	<%=exception.getMessage() %>
 
 </body>
 </html>

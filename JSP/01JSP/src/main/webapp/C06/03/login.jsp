@@ -7,20 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<%!
-	int n = 0;
-	public int countUp(){
-		n++;
-		return n;
-	}
 	
-
-%>
-
-<%=countUp()%>
-
-
-
 </body>
 </html>

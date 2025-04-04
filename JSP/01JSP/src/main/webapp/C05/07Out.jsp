@@ -8,19 +8,9 @@
 </head>
 <body>
 
-<%!
-	int n = 0;
-	public int countUp(){
-		n++;
-		return n;
-	}
-	
-
+<%
+	out.write("<h1>HELLO WORLD</h1>");
 %>
-
-<%=countUp()%>
-
-
 
 </body>
 </html>

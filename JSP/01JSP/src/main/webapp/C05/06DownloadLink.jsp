@@ -8,19 +8,10 @@
 </head>
 <body>
 
-<%!
-	int n = 0;
-	public int countUp(){
-		n++;
-		return n;
-	}
-	
 
-%>
-
-<%=countUp()%>
-
-
+<a href="04Download_SingleFile.jsp">단일파일 다운로드</a>
+<hr/>
+<a href="05Download_zip.jsp">ZIP 다운로드</a>
 
 </body>
 </html>

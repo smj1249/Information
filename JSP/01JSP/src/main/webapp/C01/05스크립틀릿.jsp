@@ -7,20 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<%!
-	int n = 0;
-	public int countUp(){
-		n++;
-		return n;
-	}
 	
 
-%>
-
-<%=countUp()%>
-
-
-
+	<!--  
+		단수 입력받아 해당 구구단을 찍어보세요 (Table로 만드세요 - 스크립틀릿)
+	-->
 </body>
 </html>

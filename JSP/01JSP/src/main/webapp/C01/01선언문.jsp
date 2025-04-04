@@ -7,33 +7,31 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!-- 
-		선언문(서블릿으로 변환되는 자바파일의 속성 / 기능을 추가)
+<!--  
+	선언문(서블릿으로 변환되는 자바파일의 속성/기능을 추가)
 -->
 
-<%!
-	// 서블릿파일의 멤버 변수(속성)
+<%! 
+	//서블릿파일의 멤버변수(속성)
 	String name = "HONG GIL DONG";
-	// 서블릿파일의 멤버함수 (기능)
+	//서블릿파일의 멤버함수(기능)
 	public String testFunc(){
 		System.out.println("선언문 TEST");
 		return "name : " + name;
 	}
-%>	
+%>
 
-<!--
-	표현식(SERVLET 파일(JAVA파일) 안의 값을 FRONTEND로 전달 표현할 때 사용
-  -->
-
+<!-- 
+	표현식(SERVLET 파일(JAVA파일) 안의 값을 FRONTEND로 전달 표현할때 사용
+ -->
 NAME : <%=name %> <br/>
 testFunc() : <%=testFunc() %><br/>
 
-<!-- 
-서블릿 파일 생성위치
-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Cataline\localhost\0
- -->
-	
-	
-	
+<!--
+서블릿 파일 생성위치  
+workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\01_JSP\org\apache\jsp\C01
+-->
+
+
 </body>
 </html>
