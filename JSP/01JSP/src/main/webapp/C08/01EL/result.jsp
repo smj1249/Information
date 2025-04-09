@@ -69,7 +69,6 @@ EL :  ${1+"1"} <br/>
 <!-- NULL CHECK -->
 NULL : ${null} <br/>
 empty NULL : ${empty null} <br/>
-
 empty null : ${empty TEST}<br>
 empty not null : ${!empty TEST}<br>
 
