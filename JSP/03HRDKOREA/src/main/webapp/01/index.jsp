@@ -7,57 +7,86 @@
 <title>Insert title here</title>
 
 <style>
-	:root{}
-	html{}
-	*{	 box-sizing:border-box;}
-	body{padding:0;margin : 0;}
-	ul{list-style:none;margin:0;padding:0;}
-	a{text-decoration:none; color:black;}
-	.wrapper{}
-	.wrapper>header{height:80px;}
-	.wrapper>nav{height:50px;}
-	.wrapper>main{ height :calc(100vh - 80px - 50px - 80px);}
-	.wrapper>main h2{
-		text-align:center;
-		font-size:1.8rem;
-		font-weight:400;
-		
-	}
-	.wrapper>main table{
-		border:1px solid;
-		border-collapse:collapse;
-		min-width:500px;
-		min-height:350px;
-		margin: 0 auto;
-	}
-	.wrapper>main table th,
-	.wrapper>main table td{
-		min-width:80px !important;
-		min-height:35px !important;
-		border:1px solid;
-		text-align:center;
-	}
-	.wrapper>main table th{
-		background-color:lightgray;
-	}
-	.wrapper>footer{height:80px;}
+:root {
 	
+}
+
+html {
+	
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.wrapper {
+	
+}
+
+.wrapper>header {
+	height: 80px;
+}
+
+.wrapper>nav {
+	height: 50px;
+}
+
+.wrapper>main {
+	height: calc(100vh - 80px - 50px - 80px);
+	overflow:auto;
+}
+
+.wrapper>main h2 {
+	text-align: center;
+	font-size: 1.8rem;
+	font-weight: 400;
+}
+
+.wrapper>main table {
+	border: 1px solid;
+	border-collapse: collapse;
+	min-width: 500px;
+	min-height: 350px;
+	margin: 0 auto;
+}
+
+.wrapper>main table th, .wrapper>main table td {
+	min-width: 80px !important;
+	min-height: 25px !important;
+	max-height: 25px !important;
+	border: 1px solid;
+	text-align: center;
+}
+
+.wrapper>main table th {
+	background-color: lightgray;
+}
+
+.wrapper>footer {
+	height: 80px;
+}
 </style>
 
 
 </head>
 <body>
 	
-	<!--  
-		select M.M_NO,M.M_NAME,P.P_NAME,M.P_SCHOOL,M.M_JUMIN,M.M_CITY,P.P_TEL1,P.P_TEL2,P.P_TEL3
-		from TBL_MEMBER_202005 M
-		join TBL_PARTY_202005 P
-		on M.P_CODE=P.P_CODE;
-	-->
-	<%@page import="Utils.*,java.util.*" %>
-	<%
-		List<MemberDto> list = DBUtils.getInstance().selectAllMember();
-	%>
 	<div class="wrapper">
 		<!--  -->
 		<%@include file="/layouts/Header.jsp" %>
@@ -66,62 +95,53 @@
 		<%@include file="/layouts/Nav.jsp" %>
 		
 		<main>
-			
-			<h2>후보조회</h2>
-			
-			<table >
+			<h2>강사조회</h2>
+			<!--  -->
+			<table>
 				<tr>
-					<th>후보번호</th>
-					<th>성명</th>
-					<th>소속정당</th>
-					<th>학력</th>
-					<th>주민번호</th>
-					<th>지역구</th>
-					<th>대표전화</th>
-				</tr>	
+					<th>강사코드</th>
+					<th>강사명</th>
+					<th>강의명</th>
+					<th>수강료</th>
+					<th>강사자격취득일</th>
+				</tr>
+				<%@page import="java.text.DecimalFormat,Utils.*,java.util.*,java.time.*,java.time.format.*" %>		
 				<%
-				for(MemberDto dto : list)
-				{
-				%>	
+				  List<TeacherDto> list = DBUtils.getInstance().selectAllTeacher();
+				%>
+				<%
+				 for(TeacherDto dto : list)
+				 {
+				%>
 				<tr>
-					<td><%=dto.getM_no() %></td>
-					<td><%=dto.getM_name() %></td>
-					<td><%=dto.getP_name() %></td>
-				<%	
-					String school = dto.getP_school();
-					switch(school)
-					{
-						case "1":
-							out.print("<td>고졸</td>");
-							break;
-						case "2":
-							out.print("<td>학사</td>");
-							break;
-						case "3":
-							out.print("<td>석사</td>");
-							break;
-						case "4":
-							out.print("<td>박사</td>");
-							break;
-					}
-				%>	
+					<td><%=dto.getTeacher_code() %></td>
+					<td><%=dto.getTeacher_name() %></td>
+					<td><%=dto.getClass_name() %></td>
+					 
+					<%
+						int price = dto.getClass_price();
+						DecimalFormat fmt = new DecimalFormat("#,###");
+					%>
+	
+					<td><%="\\"+fmt.format(price) %></td>
 					
-					
-					
-					
-					
-					<td><%=dto.getM_jumin() %></td>
-					<td><%=dto.getM_city() %></td>
-					<td><%=dto.getP_tel1()+"-"+dto.getP_tel2()+"-"+dto.getP_tel3() %></td>
-				</tr>					
-				<%	
-				}
+					<%
+						String date = dto.getTeacher_regist_date();
+						//INFMT
+						DateTimeFormatter inFmt = DateTimeFormatter.ofPattern("yyyyMMdd");
+						LocalDate localDate = LocalDate.parse(date,inFmt);
+						//OUTFMT
+						DateTimeFormatter outFmt = DateTimeFormatter.ofPattern("yyyy년MM월dd일");
+						out.print("<td>"+localDate.format(outFmt)+"</td>");
+						
+					%>
+					<%-- <td><%=dto.getTeacher_regist_date() %></td> --%>
+				</tr>
+				<%	 
+				 }
 				%>
 
-				
-				
 			</table>
-			
 		</main>
 		
 		<!--  -->

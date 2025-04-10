@@ -174,6 +174,44 @@ public class DBUtils {
 		return list;
 	}
 	
+	//selectAllOrder3
+	public List<OrderDto3> selectAllOrder3() throws Exception{
+//		select u.addr,o.ORDER_DATE, sum(o.PRICE*o.QUANTITY)
+//		from tbl_user u
+//		join tbl_order o
+//		on u.userid=o.userid
+//		group by u.addr,o.ORDER_DATE
+//		order by  u.addr asc , sum(o.PRICE*o.QUANTITY) desc
+		
+		String sql="select u.addr,o.ORDER_DATE, sum(o.PRICE*o.QUANTITY)"
+				+ " from tbl_user u"
+				+ " join tbl_order o"
+				+ " on u.userid=o.userid"
+				+ " group by u.addr,o.ORDER_DATE"
+				+ " order by  u.addr asc , sum(o.PRICE*o.QUANTITY) desc"
+				;
+		
+		pstmt = conn.prepareStatement(sql);
+		rs =  pstmt.executeQuery();
+		List<OrderDto3> list = new ArrayList();
+		OrderDto3 orderDto3 = null;
+		
+		if(rs != null) {
+			while(rs.next()) {
+				orderDto3=new OrderDto3();
+				orderDto3.setAddr(rs.getString(1));
+				orderDto3.setOrder_date(rs.getDate(2).toLocalDate());
+				orderDto3.setSum_price(rs.getInt(3));
+				list.add(orderDto3);
+			}	
+		}
+		rs.close();
+		pstmt.close();
+		return list;
+	}
+	
+	
+	
 }
 
 

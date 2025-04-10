@@ -49,6 +49,7 @@ a {
 
 .wrapper>main {
 	height: calc(100vh - 80px - 50px - 80px);
+	overflow:auto;
 }
 
 .wrapper>main h2 {
@@ -85,6 +86,16 @@ a {
 </head>
 <body>
 	
+	
+	<%@page import="Utils.*,java.util.*" %>
+	<%
+		//모든 회원정보 가져오기
+		//List<MemberDto> member_list = DBUtils.getInstance().selectAllMember();
+		//List<ClassDto> class_list = DBUtils.getInstance().selectAllClass();
+		
+		List<Join1Dto> join_list = DBUtils.getInstance().selectAllJoin1();
+	%>
+	
 	<div class="wrapper">
 		<!--  -->
 		<%@include file="/layouts/Header.jsp" %>
@@ -93,7 +104,39 @@ a {
 		<%@include file="/layouts/Nav.jsp" %>
 		
 		<main>
-			<h2>03폴더</h2>
+		
+			<h2>회원정보조회</h2>
+			
+			<table>
+				<tr>
+					<th>수강월</th>
+					<th>회원번호</th>
+					<th>회원명</th>
+					<th>강의명</th>
+					<th>강의장소</th>
+					<th>수강료</th>
+					<th>등급</th>
+				</tr>
+				<%
+				for(Join1Dto dto : join_list)
+				{
+				%>	
+				<tr>
+					<td><%=dto.getRegist_month() %></td>
+					<td><%=dto.getC_no() %></td>
+					<td><%=dto.getC_name() %></td>
+					<td><%=dto.getClass_name() %></td>
+					<td><%=dto.getClass_area() %></td>
+					<td><%=dto.getTuition() %></td>
+					<td><%=dto.getGrade() %></td>
+				</tr>	
+					
+					
+				<%	
+				}
+				%>
+
+			</table>
 		</main>
 		
 		<!--  -->

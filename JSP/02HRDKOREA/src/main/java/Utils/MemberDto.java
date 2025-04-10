@@ -10,9 +10,8 @@ public class MemberDto {
 	private String p_tel1;
 	private String p_tel2;
 	private String p_tel3;
-	
-	MemberDto() {}
-	
+	//나머지 추가코드 넣어주세요(생성자 / getter and setter / toString)
+	public MemberDto() {}
 	public MemberDto(String m_no, String m_name, String p_name, String p_school, String m_jumin, String m_city,
 			String p_tel1, String p_tel2, String p_tel3) {
 		super();
@@ -25,12 +24,6 @@ public class MemberDto {
 		this.p_tel1 = p_tel1;
 		this.p_tel2 = p_tel2;
 		this.p_tel3 = p_tel3;
-	}
-	@Override
-	public String toString() {
-		return "MemberDto [m_no=" + m_no + ", m_name=" + m_name + ", p_name=" + p_name + ", p_school=" + p_school
-				+ ", m_jumin=" + m_jumin + ", m_city=" + m_city + ", p_tel1=" + p_tel1 + ", p_tel2=" + p_tel2
-				+ ", p_tel3=" + p_tel3 + "]";
 	}
 	public String getM_no() {
 		return m_no;
@@ -86,7 +79,11 @@ public class MemberDto {
 	public void setP_tel3(String p_tel3) {
 		this.p_tel3 = p_tel3;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "MemberDto [m_no=" + m_no + ", m_name=" + m_name + ", p_name=" + p_name + ", p_school=" + p_school
+				+ ", m_jumin=" + m_jumin + ", m_city=" + m_city + ", p_tel1=" + p_tel1 + ", p_tel2=" + p_tel2
+				+ ", p_tel3=" + p_tel3 + "]";
+	}
 	
 }

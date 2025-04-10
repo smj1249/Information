@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +15,7 @@ public class DBUtils {
 	
 	private Connection conn;
 	private PreparedStatement pstmt;
-	private ResultSet rs;
-
+	private ResultSet rs;	
 	
 	//싱글톤 
 	private static DBUtils instance;
@@ -31,25 +29,25 @@ public class DBUtils {
 		return instance;
 	}
 	
-	// select m.m_name,p.p_name,m.p_school,m.m_jumin,m.m_city,p.p_tel1,p.p_tel2,p.p_tel3
-	// from tbl_member_202005 m
-	// join tbl_party_202005 p
-	// on m.p_code=p.p_code;
+//	select M.M_NO,M.M_NAME,P.P_NAME,M.P_SCHOOL,M.M_JUMIN,M.M_CITY,P.P_TEL1,P.P_TEL2,P.P_TEL3
+//	from TBL_MEMBER_202005 M
+//	join TBL_PARTY_202005 P
+//	on M.P_CODE=P.P_CODE;
 	public List<MemberDto> selectAllMember() throws Exception{
-		
-		String sql="select m.m_no,m.m_name,p.p_name,m.p_school,m.m_jumin,m.m_city,p.p_tel1,p.p_tel2,p.p_tel3"
-				+ " from tbl_member_202005 m"
-				+ " join tbl_party_202005 p"
-				+ " on m.p_code=p.p_code"
+		String sql="select M.M_NO,M.M_NAME,P.P_NAME,M.P_SCHOOL,M.M_JUMIN,M.M_CITY,P.P_TEL1,P.P_TEL2,P.P_TEL3"
+				+ " from TBL_MEMBER_202005 M"
+				+ " join TBL_PARTY_202005 P"
+				+ " on M.P_CODE=P.P_CODE"
 				;
 		
 		pstmt = conn.prepareStatement(sql);
 		rs = pstmt.executeQuery();
-		List<MemberDto> list = new ArrayList<>();
+		List<MemberDto> list = new ArrayList();
 		MemberDto dto = null;
 		if(rs!=null) {
+			
 			while(rs.next()) {
-				dto = new MemberDto();
+				dto = new MemberDto();	
 				dto.setM_no(rs.getString(1));
 				dto.setM_name(rs.getString(2));
 				dto.setP_name(rs.getString(3));
@@ -62,12 +60,15 @@ public class DBUtils {
 				list.add(dto);
 			}
 		}
+		
 		pstmt.close();
 		rs.close();
 		return list;
 	}
+
 	
 	public int insertVote(VoteDto dto) throws Exception {
+		
 		pstmt = conn.prepareStatement("insert into TBL_VOTE_202005 values(?,?,?,?,?,?)");
 		pstmt.setString(1, dto.getV_jumin());
 		pstmt.setString(2, dto.getV_name());
@@ -82,6 +83,36 @@ public class DBUtils {
 		return result;
 	}
 	
+	
+	public List<VoteDto> selectAllVote() throws Exception{
+		String sql="select * from TBL_VOTE_202005";
+		pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		List<VoteDto> list = new ArrayList();
+		VoteDto dto = null;
+		if(rs!=null) {
+			while(rs.next()) {
+				dto = new VoteDto();
+				dto.setV_jumin(rs.getString(1));
+				dto.setV_name(rs.getString(2));
+				dto.setM_no(rs.getString(3));
+				dto.setV_time(rs.getString(4));
+				dto.setV_area(rs.getString(5));
+				dto.setV_confirm(rs.getString(6));
+				list.add(dto);
+			}
+		}
+		pstmt.close();
+		rs.close();
+		return list;
+	}
+	
+	
 }
+
+
+
+
+
 
 

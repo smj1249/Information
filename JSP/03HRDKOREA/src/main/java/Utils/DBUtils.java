@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +15,7 @@ public class DBUtils {
 	
 	private Connection conn;
 	private PreparedStatement pstmt;
-	private ResultSet rs;
-
+	private ResultSet rs;	
 	
 	//싱글톤 
 	private static DBUtils instance;
@@ -31,57 +29,187 @@ public class DBUtils {
 		return instance;
 	}
 	
-	// select m.m_name,p.p_name,m.p_school,m.m_jumin,m.m_city,p.p_tel1,p.p_tel2,p.p_tel3
-	// from tbl_member_202005 m
-	// join tbl_party_202005 p
-	// on m.p_code=p.p_code;
-	public List<MemberDto> selectAllMember() throws Exception{
-		
-		String sql="select m.m_no,m.m_name,p.p_name,m.p_school,m.m_jumin,m.m_city,p.p_tel1,p.p_tel2,p.p_tel3"
-				+ " from tbl_member_202005 m"
-				+ " join tbl_party_202005 p"
-				+ " on m.p_code=p.p_code"
-				;
-		
+	//강사테이블조회
+	public List<TeacherDto> selectAllTeacher() throws Exception {
+		String sql="select * from TBL_TEACHER_202201";
 		pstmt = conn.prepareStatement(sql);
+		
 		rs = pstmt.executeQuery();
-		List<MemberDto> list = new ArrayList<>();
-		MemberDto dto = null;
+		List<TeacherDto> list = new ArrayList();
+		TeacherDto dto = null;
 		if(rs!=null) {
+			
 			while(rs.next()) {
-				dto = new MemberDto();
-				dto.setM_no(rs.getString(1));
-				dto.setM_name(rs.getString(2));
-				dto.setP_name(rs.getString(3));
-				dto.setP_school(rs.getString(4));
-				dto.setM_jumin(rs.getString(5));
-				dto.setM_city(rs.getString(6));
-				dto.setP_tel1(rs.getString(7));
-				dto.setP_tel2(rs.getString(8));
-				dto.setP_tel3(rs.getString(9));
+				//코드 추가해주세요 -
+				dto=new TeacherDto();
+				dto.setTeacher_code(rs.getString(1));
+				dto.setTeacher_name(rs.getString(2));
+				dto.setClass_name(rs.getString(3));
+				dto.setClass_price(rs.getInt(4));
+				dto.setTeacher_regist_date(rs.getString(5));
 				list.add(dto);
 			}
+			
 		}
-		pstmt.close();
+		
+		return list;
+	}
+
+	
+	public List<MemberDto> selectAllMember() throws Exception{
+		String sql="select * from TBL_MEMBER_202201";
+		pstmt = conn.prepareStatement(sql);
+		
+		rs = pstmt.executeQuery();
+		List<MemberDto> list = new ArrayList();
+		MemberDto dto = null;
+		if(rs!=null) {
+			
+			while(rs.next()) {
+				//코드 추가해주세요 -
+				dto=new MemberDto();
+				dto.setC_no(rs.getString(1));
+				dto.setC_name(rs.getString(2));
+				dto.setPhone(rs.getString(3));
+				dto.setAddress(rs.getString(4));
+				dto.setGrade(rs.getString(5));
+				list.add(dto);
+			}
+			
+		}
 		rs.close();
+		pstmt.close();
 		return list;
 	}
 	
-	public int insertVote(VoteDto dto) throws Exception {
-		pstmt = conn.prepareStatement("insert into TBL_VOTE_202005 values(?,?,?,?,?,?)");
-		pstmt.setString(1, dto.getV_jumin());
-		pstmt.setString(2, dto.getV_name());
-		pstmt.setString(3, dto.getM_no());
-		pstmt.setString(4, dto.getV_time());
-		pstmt.setString(5, dto.getV_area());
-		pstmt.setString(6, dto.getV_confirm());
+	public List<ClassDto> selectAllClass() throws Exception{
+		String sql="select * from TBL_CLASS_202201";
+		pstmt = conn.prepareStatement(sql);
+		
+		rs = pstmt.executeQuery();
+		List<ClassDto> list = new ArrayList();
+		ClassDto dto = null;
+		if(rs!=null) {
+			
+			while(rs.next()) {
+				//코드 추가해주세요 -
+				dto=new ClassDto();
+				dto.setRegist_month(rs.getString(1));
+				dto.setC_no(rs.getString(2));
+				dto.setClass_area(rs.getString(3));
+				dto.setTuition(rs.getString(4));
+				dto.setTeacher_code(rs.getString(5));
+				list.add(dto);
+			}
+			
+		}
+		rs.close();
+		pstmt.close();
+		return list;
+	}
+	
+
+	public int insertClass(ClassDto classDto) throws Exception{
+		
+		pstmt = conn.prepareStatement("insert into TBL_CLASS_202201 values(?,?,?,?,?)");
+		pstmt.setString(1, classDto.getRegist_month());
+		pstmt.setString(2, classDto.getC_no());
+		pstmt.setString(3, classDto.getClass_area());
+		pstmt.setString(4, classDto.getTuition());
+		pstmt.setString(5, classDto.getTeacher_code());
 		
 		int result = pstmt.executeUpdate();
 		
+		conn.commit();
 		pstmt.close();
 		return result;
 	}
+
+//  03 index
+//	SELECT C.REGIST_MONTH,M.C_NO,M.C_NAME,T.CLASS_NAME,C.CLASS_AREA,C.TUITION,M.GRADE
+//	FROM TBL_MEMBER_202201 M
+//	JOIN TBL_CLASS_202201 C
+//	ON C.C_NO=M.C_NO
+//	JOIN TBL_TEACHER_202201 T
+//	ON C.TEACHER_CODE=T.TEACHER_CODE;
 	
+	public List<Join1Dto> selectAllJoin1() throws Exception{
+		String sql="SELECT C.REGIST_MONTH,M.C_NO,M.C_NAME,T.CLASS_NAME,C.CLASS_AREA,C.TUITION,M.GRADE"
+				+ " FROM TBL_MEMBER_202201 M"
+				+ " JOIN TBL_CLASS_202201 C"
+				+ " ON C.C_NO=M.C_NO"
+				+ " JOIN TBL_TEACHER_202201 T"
+				+ " ON C.TEACHER_CODE=T.TEACHER_CODE";
+		pstmt = conn.prepareStatement(sql);
+		
+		rs = pstmt.executeQuery();
+		List<Join1Dto> list = new ArrayList();
+		Join1Dto dto = null;
+		if(rs!=null) {
+			
+			while(rs.next()) {
+				//코드 추가해주세요 -
+				dto=new Join1Dto();
+				dto.setRegist_month(rs.getString(1));
+				dto.setC_no(rs.getString(2));
+				dto.setC_name(rs.getString(3));
+				dto.setClass_name(rs.getString(4));
+				dto.setClass_area(rs.getString(5));
+				dto.setTuition(rs.getString(6));
+				dto.setGrade(rs.getString(7));
+				list.add(dto);
+			}
+			
+		}
+		rs.close();
+		pstmt.close();
+		return list;
+	}
+	
+//	SELECT T.TEACHER_CODE,T.CLASS_NAME,T.TEACHER_NAME,SUM(C.TUITION)
+//	FROM TBL_CLASS_202201 C
+//	JOIN TBL_TEACHER_202201 T
+//	ON C.TEACHER_CODE = T.TEACHER_CODE
+//	GROUP BY T.TEACHER_CODE,T.CLASS_NAME,T.TEACHER_NAME
+//	ORDER BY SUM(C.TUITION) desc;
+	
+	public List<Join2Dto> selectAllJoin2() throws Exception{
+		String sql="SELECT T.TEACHER_CODE,T.CLASS_NAME,T.TEACHER_NAME,SUM(C.TUITION)"
+				+ " FROM TBL_CLASS_202201 C"
+				+ " JOIN TBL_TEACHER_202201 T"
+				+ " ON C.TEACHER_CODE = T.TEACHER_CODE"
+				+ " GROUP BY T.TEACHER_CODE,T.CLASS_NAME,T.TEACHER_NAME"
+				+ " ORDER BY SUM(C.TUITION) desc";
+				
+
+		pstmt = conn.prepareStatement(sql);
+		
+		rs = pstmt.executeQuery();
+		List<Join2Dto> list = new ArrayList();
+		Join2Dto dto = null;
+		if(rs!=null) {
+			
+			while(rs.next()) {
+				//코드 추가해주세요 -
+				dto=new Join2Dto();
+				dto.setTeacher_code(rs.getString(1));
+				dto.setClass_name(rs.getString(2));
+				dto.setTeacher_name(rs.getString(3));
+				dto.setTotal_tuition(rs.getString(4));
+				list.add(dto);
+			}
+			
+		}
+		rs.close();
+		pstmt.close();
+		return list;
+	}
+
 }
+
+
+
+
+
 
 

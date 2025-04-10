@@ -32,6 +32,14 @@
 		<!--  -->
 		<%@include file="/layouts/Nav.jsp" %>
 		
+		<!--  
+		select M.M_NO,M.M_NAME,COUNT(*)
+		from TBL_MEMBER_202005 M
+		join TBL_VOTE_202005 V
+		on M.M_NO=V.M_NO
+		group by M.M_NO,M.M_NAME
+		order by COUNT(*) desc;
+		-->
 		<main>
 			<h2>04폴더</h2>
 		</main>

@@ -95,7 +95,8 @@ a {
 
 		<main>
 			<h2>투표하기</h2>
-			<form name="vote_form" action="./create.jsp" method="post" onsubmit="return false">
+			<form name="vote_form" action="./create.jsp" method="post"
+				onsubmit="return false">
 				<div>
 					<label>주민번호</label> <input name="v_jumin" />
 				</div>
@@ -103,7 +104,7 @@ a {
 					<label>성명</label> <input name="v_name" />
 				</div>
 				<div>
-					<label>투표번호</label> <input name="m_no"/>
+					<label>투표번호</label> <input name="m_no" />
 				</div>
 				<div>
 					<label>투표시간</label> <input name="v_time" />
@@ -112,10 +113,9 @@ a {
 					<label>투표장소</label> <input name="v_area" />
 				</div>
 				<div>
-					<label>유권자확인</label> 
-						<input type="radio" name="v_confirm" value="Y" /> 확인
-						&nbsp;&nbsp;
-						<input type="radio" name="v_confirm" value="N" /> 미확인
+					<label>유권자확인</label> <input type="radio" name="v_confirm" value="Y" />
+					확인 &nbsp;&nbsp; <input type="radio" name="v_confirm" value="N" />
+					미확인
 				</div>
 				<div>
 					<button type="submit" onclick="isValid()">투표하기</button>
@@ -128,23 +128,23 @@ a {
 		<%@include file="/layouts/Footer.jsp"%>
 
 	</div>
-	
+
 	<script>
-		function isValid(){
+		function isValid() {
 			//form요소 찾기 
 			var form = document.vote_form;
 			//유효성검사
-			if(form.v_jumin.value===""){
+			if (form.v_jumin.value === "") {
 				alert("주민번호가 입력되지 않았습니다!");
 				form.v_jumin.focus();
-				return ;
+				return;
 			}
 			//...
-			if(form.v_confirm.value===""){
+			if (form.v_confirm.value === "") {
 				alert("유권자 확인이 선택되지 않았습니다!");
-				return ;
+				return;
 			}
-				
+
 			//submit처리
 			form.submit();
 		}
