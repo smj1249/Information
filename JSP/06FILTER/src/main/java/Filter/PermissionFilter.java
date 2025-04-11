@@ -17,60 +17,69 @@ import javax.servlet.http.HttpSession;
 import Type.Role;
 
 public class PermissionFilter implements Filter{
+	
 	//URL : Permission Value
 	private Map<String,Role> pageGradeMap = new HashMap();
+	
 	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		//
 		String projectPath = filterConfig.getServletContext().getContextPath();
-		pageGradeMap.put(projectPath+"/admin_main",Role.ROLE_ADMIN);
-		pageGradeMap.put(projectPath+"/manager_main",Role.ROLE_MEMBER);
-		pageGradeMap.put(projectPath+"/user_main",Role.ROLE_USER);
+//		/admin_main 	필요한 권한값(3) - ROLE_ADMIN 
+//		/manager_main 	필요한 권한값(2) - ROLE_MANAGER
+//		/user_main 		필요한 권한값(1) - ROLE_USER
+//						
+		pageGradeMap.put(projectPath+"/admin_main", Role.ROLE_ADMIN); //3
+		pageGradeMap.put(projectPath+"/manager_main", Role.ROLE_MANAGER); //2
+		pageGradeMap.put(projectPath+"/user_main", Role.ROLE_USER); //1
 	}
+
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
+		
 		HttpServletRequest request = (HttpServletRequest)req;
 		HttpServletResponse response = (HttpServletResponse)resp;
-		
+	
 		HttpSession session = request.getSession();
 		
 		String myRole = (String)session.getAttribute("role");
 		if(myRole==null) {
 			response.sendRedirect(request.getContextPath()+"/login.do?msg=not authenticated...");
-			return;
+			return ;
 		}
 		//
-		Role my = null;
-		switch(myRole) {
+		Role my=null;
+		switch(myRole)
+		{
 			case "ROLE_USER":
 				my = Role.ROLE_USER;		//1
 				break;
-			case "ROLE_ADMIN":
-				my = Role.ROLE_ADMIN;		//2
-				break;
 			case "ROLE_MANAGER":
-				my = Role.ROLE_MEMBER;		//3
+				my = Role.ROLE_MANAGER;		//2
+				break;			
+			case "ROLE_ADMIN":
+				my = Role.ROLE_ADMIN;		//3
 				break;
-			default:
+			default : 
 				my = Role.ROLE_ANONYMOUS;	//0
 				break;
 		}
 		
 		//Page Role Value 꺼내기
-		String requestUri = request.getRequestURI();		// /project/admin_main...
-		Role pageRole = pageGradeMap.get(requestUri);
+		String requestUri = request.getRequestURI();	// /project/admin_main..
+		Role pageRole =  pageGradeMap.get(requestUri);
 		
 		System.out.printf("URL : %s,MyRole : %d, PageRole : %d\n",requestUri,my.ordinal(),pageRole.ordinal());
-
+		
 		if(my.ordinal()<pageRole.ordinal()) {
 			throw new ServletException("해당 권한으로는 접근이 불가능한 페이지입니다.");
 		}
 		
-		System.out.println("[FILTER] perm Filter start...");
+		System.out.println("[FILTER] Perm Filter start..");
 		chain.doFilter(req, resp);
-		System.out.println("[FILTER] perm Filter end..");
+		System.out.println("[FILTER] Perm Filter end..");
 	}
 
 }

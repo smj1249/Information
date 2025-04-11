@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 //@WebServlet("/admin_main")
-public class AdminMain extends HttpServlet {
+public class AdminMain extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -17,5 +17,4 @@ public class AdminMain extends HttpServlet {
 		req.getRequestDispatcher("/WEB-INF/user/admin.jsp").forward(req, resp);
 	}
 	
-
 }

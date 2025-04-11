@@ -17,13 +17,14 @@ public class C02ListenerTest extends HttpServlet{
 		String uri = req.getRequestURI();
 		if(uri.contains("/app/add")) {
 			req.getServletContext().setAttribute("CTX_KEY", "CTX_VALUE");
+			
 		}else if(uri.contains("/app/replace")) {
 			req.getServletContext().setAttribute("CTX_KEY", "CTX_VALUE_2");
 		}else {
 			req.getServletContext().removeAttribute("CTX_KEY");
 		}
 	}
-
 	
+
 	
 }

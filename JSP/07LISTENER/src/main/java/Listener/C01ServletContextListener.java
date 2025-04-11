@@ -4,11 +4,12 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-@WebListener
-public class C01ServletContextListener implements ServletContextListener {
+//@WebListener
+public class C01ServletContextListener implements ServletContextListener{
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
+		//----
 		System.out.println("[LISTENER] C01ServletContextListener..start...");
 	}
 	
@@ -16,5 +17,9 @@ public class C01ServletContextListener implements ServletContextListener {
 	public void contextDestroyed(ServletContextEvent sce) {
 		System.out.println("[LISTENER] C01ServletContextListener..end...");
 	}
+
+
+
+	
 	
 }
