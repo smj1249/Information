@@ -45,7 +45,7 @@ public class Join extends HttpServlet{
 		//처리작업(DB저장)
 		int result=0;
 		try {
-			//result = dbutils.insert(new UserDto(username,password,"ROLE_USER"));
+			result = dbutils.insert(new UserDto(username,password,"ROLE_USER"));
 		
 		} catch (Exception e) {
 			e.printStackTrace();

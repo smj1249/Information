@@ -7,9 +7,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+
 public class MysqlDbUtils {
 	
-	private String url = "jdbc:mysql://localhost/bookDB";
+	private String url = "jdbc:mysql://localhost/testDB";
 	private String id = "root";
 	private String pw = "1234";
 	
@@ -17,16 +19,18 @@ public class MysqlDbUtils {
 	private PreparedStatement pstmt;
 	private ResultSet rs;	
 	
-	//싱글톤 
-	private static MysqlDbUtils instance;
+	// DataSource Resource 연결
+	private DataSource dataSource;
+	
+	// 싱글톤
+	private staticMysqlDbUtils instance;
+	
 	private MysqlDbUtils() throws Exception {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		conn = DriverManager.getConnection(url, id, pw);
-	}
-	public static MysqlDbUtils getInstance() throws Exception {
-		if(instance==null)
-			instance = new MysqlDbUtils();
-		return instance;
+		Context initContext = new InitialContext();
+		Context envContext = (Context)initContext.lookup("java:/comp/env");
+		dataSource = (DataSource)envContext.lookup("jdbc/MysqlDB");
+		conn = dataSource.getConnection();
+		System.out.println("Connection : " + conn);
 	}
 	
 	
