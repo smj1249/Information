@@ -31,7 +31,7 @@ public class MysqlDbUtils {
 		pstmt = conn.prepareStatement("insert into tbl_user values(?,?,?)");
 		pstmt.setString(1,userDto.getUsername());
 		pstmt.setString(2,userDto.getPassword());
-		pstmt.setString(3,userDto.getRole());
+		pstmt.setString(3,userDto .getRole());
 		
 		int result =  pstmt.executeUpdate();
 		
